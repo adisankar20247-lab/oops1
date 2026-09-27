@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startLoading(normalizedUrl);
 
         // Send POST request to backend
-        fetch('/api/scan', {
+        fetch('https://website-scanner-drbu.onrender.com/api/scan', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
