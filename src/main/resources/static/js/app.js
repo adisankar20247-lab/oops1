@@ -475,8 +475,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Scan History CRUD
     function loadScanHistory() {
-        fetch('/api/scans')
-            .then(res => res.json())
+        fetch(`${API_BASE}/api/scans`)
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return res.json();
+            })
             .then(scans => {
                 renderHistoryTable(scans);
             })
@@ -484,7 +487,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 historyTableBody.innerHTML = '<tr><td colspan="7" class="empty-state">Unable to load scan history.</td></tr>';
             });
     }
-
     function renderHistoryTable(scans) {
         historyTableBody.innerHTML = '';
         if (!scans || scans.length === 0) {
